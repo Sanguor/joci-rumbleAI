@@ -39,12 +39,12 @@ def movePawn(x, y, pawnId):
     globalBoard[y][x].append(pawnId)
 
 
-def killPawn(x, y, pawnId):
+def removePawn(x, y, pawnId):
     globalBoard[y][x].remove(pawnId)
 
 
 def searchKills():
-    """returns the position in  of all rooms containing more than one pawn"""
+    """returns the position of all rooms containing more than one pawn"""
     killPossibilities = []
     for subArray, subArrayIndex in zip(globalBoard, list(range(0, len(globalBoard)))):
         for room, roomIndex in zip(subArray, list(range(0, len(subArray)))):
@@ -140,7 +140,7 @@ def handleUpdate(data):
 
     if 'deaths' in data:
         pawn = data['deaths'][- 1]
-        killPawn(x, y, pawn)
+        removePawn(x, y, pawn)
     else:
         pawn = data['pawn']
         movePawn(x, y, pawn)
